@@ -16,6 +16,12 @@
     <Filter Include="Header Files\API">
       <UniqueIdentifier>{075da200-1ed1-4ac6-a367-8ab715b0d4ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Pieces">
+      <UniqueIdentifier>{fcf627fe-20a2-448a-9701-b8a4c50c9a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pieces">
+      <UniqueIdentifier>{bd8e86be-bf83-4e58-a9b5-cfafa2e8c498}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp">
@@ -29,6 +35,12 @@
     </ClCompile>
     <ClCompile Include="Piece.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrrior.cpp">
+      <Filter>Source Files\Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="King.cpp">
+      <Filter>Source Files\Pieces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +61,12 @@
     </ClInclude>
     <ClInclude Include="IGame.h">
       <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrrior.h">
+      <Filter>Header Files\Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="King.h">
+      <Filter>Header Files\Pieces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
