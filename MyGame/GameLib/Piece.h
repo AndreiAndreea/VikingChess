@@ -17,9 +17,13 @@ public:
 	EPieceRole GetRole() const override;
 	EPieceType GetType() const override;
 
+	bool Is(EPieceType type, EPieceRole role) const override;
+	bool IsOpposite(EPieceRole role, std::initializer_list<EPieceType> list) const;
+	
 private:
 	EPieceType m_type;
 	EPieceRole m_role;
+	std::vector<Position> m_possibleMoves;
 };
 
 using PiecePtr = std::shared_ptr<Piece>;
