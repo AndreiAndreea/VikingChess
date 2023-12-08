@@ -9,18 +9,24 @@
 #include<vector>
 
 //using Position = std::pair<int, int>;
-using BoardType = std::vector<std::vector<PiecePtr>>;
+using PieceMatrix = std::vector<std::vector<PiecePtr>>;
+using ConfigMatrix = std::vector<std::pair<PiecePtr, Position>>;
 
 class Board
 {
 public:
 	Board();
-	Board(BoardType board);
+	Board(ConfigMatrix piecePos);
+
 	void InitializeBoard();
+
+	PieceMatrix GetBoard() const;
+	void SetPiece(Position pos, EPieceRole role, EPieceType type);
+	void SetPieceToNullptr(Position pos);
+
 	bool MakeMove(Position startPos, Position endPos);
-	BoardType GetBoard() const;
-	//void printBoard();
+	bool IsKingInCheck(Position startPos, Position endPos, EPieceRole pieceRole) const;
 
 private:
-	BoardType m_board;
+	PieceMatrix m_board;
 };

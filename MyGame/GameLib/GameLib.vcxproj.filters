@@ -42,6 +42,9 @@
     <ClCompile Include="King.cpp">
       <Filter>Source Files\Pieces</Filter>
     </ClCompile>
+    <ClCompile Include="EPieceRole.h">
+      <Filter>Header Files\API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="King.h">
       <Filter>Header Files\Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="EPieceType.h">
+      <Filter>Header Files\API</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
