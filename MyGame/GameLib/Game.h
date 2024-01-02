@@ -25,10 +25,11 @@ public:
 
 	Board GetBoard() const;
 
-
+	//methods from interface IGame
 	void Play() override;
-	EPlayer GetWinner() override;
-	bool IsGameOver() override;
+	EPlayer GetWinner() const override;
+	EPlayer GetCurrentPlayer() const override;
+	bool IsGameOver() const override;
 
 private:
 	Board m_board;
