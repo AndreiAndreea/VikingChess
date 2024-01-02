@@ -33,6 +33,8 @@ public:
 
 	IPieceInfoPtr GetPieceInfo(int i, int j) const override;
 
+private:
+	Position ConvertToPos(const std::string& pos);
 
 private:
 	Board m_board;
