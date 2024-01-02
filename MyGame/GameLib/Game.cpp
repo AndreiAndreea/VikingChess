@@ -30,6 +30,19 @@ EPlayer Game::GetCurrentPlayer() const
 
 }
 
+bool Game::IsGameOver() const
+{
+	EPieceRole role;
+	if (m_turn)
+		role = EPieceRole::Attacker;
+	else
+		role = EPieceRole::Defender;
+	/*if (m_board.IsCheckmate(role))
+		return true;*/
+	return false;
+}
+
+
 void Game::Play()
 {
 	std::cout << "Test";
