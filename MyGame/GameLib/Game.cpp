@@ -86,6 +86,19 @@ bool Game::IsInputValid(const Position& startPos, const Position& endPos)
 	return true;
 }
 
+bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr)
+{
+	Position startPos = ConvertToPos(startPosStr);
+	Position endPos = ConvertToPos(endPosStr);
+
+	if (IsInputValid(startPos, endPos) && m_board.MakeMove(startPos, endPos))
+	{
+		m_turn = 1 - m_turn;
+		return true;
+	}
+	return false;
+
+}
 
 void Game::Play()
 {
