@@ -55,6 +55,38 @@ IPieceInfoPtr Game::GetPieceInfo(int i, int j) const
 	return {};
 }
 
+//verifica daca coordonatele sunt valide pentru tabla de 11 pe 11
+Position Game::ConvertToPos(const std::string& pos)
+{
+	Position convertedPos;
+	convertedPos.second = pos[0] - 'A' + 1;
+	convertedPos.first = 9 - (pos[1] - '0');
+	return convertedPos;
+}
+
+bool Game::IsInputValid(const Position& startPos, const Position& endPos)
+{
+	if (startPos.first < 1 || startPos.first > 11 || startPos.second < 1 || startPos.second > 11)
+		return false;
+	if (m_board.GetBoard()[startPos.first][startPos.second])
+		if (m_turn)
+		{
+			if (m_board.GetBoard()[startPos.first][startPos.second]->GetRole() != EPieceRole::Attacker)
+				return false;
+		}
+		else
+		{
+			if (m_board.GetBoard()[startPos.first][startPos.second]->GetRole() != EPieceRole::Defender)
+				return false;
+		}
+
+	if (endPos.first < 1 || endPos.first > 11 || endPos.second < 1 || endPos.second > 11)
+		return false;
+
+	return true;
+}
+
+
 void Game::Play()
 {
 	std::cout << "Test";

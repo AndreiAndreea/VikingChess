@@ -35,6 +35,7 @@ public:
 
 private:
 	Position ConvertToPos(const std::string& pos);
+	bool IsInputValid(const Position& startPos, const Position& endPos);
 
 private:
 	Board m_board;
