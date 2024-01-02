@@ -25,6 +25,24 @@ Board::Board(ConfigMatrix piecePos)
     }
 }
 
+Board::Board(int)
+{
+    m_board.resize(11);
+    for (int i = 1; i <= 11; i++)
+    {
+        m_board[i].resize(11);
+    }
+
+    for (int x = 1; x <= 11; x++)
+        for (int y = 1; y <= 11; y++)
+            m_board[x][y] = nullptr;
+}
+
+Board::Board(const Board& ob)
+{
+    m_board = ob.GetBoard();
+}
+
 //indexarea de la 0 la 10
 void Board::InitializeBoard() {
     m_board.resize(11);
@@ -97,7 +115,7 @@ PieceMatrix Board::GetBoard() const
     return m_board;
 }
 
-void Board::SetPiece(Position pos, EPieceRole role, EPieceType type)
+void Board::SetPiece(const Position& pos, EPieceRole role, EPieceType type)
 {
 
     switch (type)
@@ -113,7 +131,7 @@ void Board::SetPiece(Position pos, EPieceRole role, EPieceType type)
     }
 }
 
-void Board::SetPieceToNullptr(Position pos)
+void Board::SetPieceToNullptr(const Position& pos)
 {
     m_board[pos.first][pos.second] = nullptr;
 }

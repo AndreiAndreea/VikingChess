@@ -16,15 +16,20 @@ class Board
 {
 public:
 	Board();
+	Board(int);
+	Board(const Board& ob);
 	Board(ConfigMatrix piecePos);
 
 	void InitializeBoard();
 
 	PieceMatrix GetBoard() const;
-	void SetPiece(Position pos, EPieceRole role, EPieceType type);
-	void SetPieceToNullptr(Position pos);
 
 	bool MakeMove(Position startPos, Position endPos);
+
+
+	void SetPiece(const Position& pos, EPieceRole role, EPieceType type);
+	void SetPieceToNullptr(const Position& pos);
+
 	bool IsKingInCheck(Position startPos, Position endPos, EPieceRole pieceRole) const;
 
 private:
