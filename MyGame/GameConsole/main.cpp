@@ -22,7 +22,7 @@ std::string PieceToStr(IPieceInfoPtr pieceInfo)
 std::string PlayerToStr(EPlayer player)
 {
 	if (player == EPlayer::Attacker)
-		return "PlayerAttaxker";
+		return "PlayerAttacker";
 	else
 		if (player == EPlayer::Defender)
 			return "PlayerDefender";

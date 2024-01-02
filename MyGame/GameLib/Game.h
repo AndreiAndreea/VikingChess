@@ -31,6 +31,9 @@ public:
 	EPlayer GetCurrentPlayer() const override;
 	bool IsGameOver() const override;
 
+	IPieceInfoPtr GetPieceInfo(int i, int j) const override;
+
+
 private:
 	Board m_board;
 	int m_turn;

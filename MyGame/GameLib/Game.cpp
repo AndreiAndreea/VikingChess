@@ -10,6 +10,12 @@ Board Game::GetBoard() const
 	return m_board;
 }
 
+IGamePtr IGame::Produce()
+{
+	return std::make_shared<Game>();
+}
+
+
 EPlayer Game::GetWinner() const
 {
 	if (IsGameOver())
@@ -42,6 +48,12 @@ bool Game::IsGameOver() const
 	return false;
 }
 
+IPieceInfoPtr Game::GetPieceInfo(int i, int j) const
+{
+	if (auto piece = m_board.GetBoard()[i][j])
+		return std::make_shared<PieceInfo>(piece->GetType(), piece->GetRole());
+	return {};
+}
 
 void Game::Play()
 {
