@@ -100,6 +100,24 @@ bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr
 
 }
 
+
+PieceInfo::PieceInfo(EPieceType type, EPieceRole role)
+	: m_type(type)
+	, m_role(role)
+{
+
+}
+
+EPieceRole PieceInfo::GetRole() const
+{
+	return m_role;
+}
+
+EPieceType PieceInfo::GetType() const
+{
+	return m_type;
+}
+
 void Game::Play()
 {
 	std::cout << "Test";
