@@ -40,9 +40,9 @@ void PrintBoard(const IGamePtr& game) {
 
 	const int cellWidth = 5; // Width of each cell (including spaces)
 
-	for (int i = 1; i <= 11; i++)
+	for (int i = 0; i < 11; i++)
 	{
-		for (int j = 1; j <= 11; j++)
+		for (int j = 0; j < 11; j++)
 		{
 			auto pieceInfo = game->GetPieceInfo(i, j);
 
@@ -64,7 +64,6 @@ void PrintBoard(const IGamePtr& game) {
 
 int main()
 {
-	std::cout << "it works";
 	IGamePtr game = IGame::Produce();
 	PrintBoard(game);
 	std::cout << "\n";

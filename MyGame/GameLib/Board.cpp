@@ -99,6 +99,7 @@ void Board::InitializeBoard() {
     m_board[5][4] = std::make_shared<Warrior>(EPieceRole::Defender);
     m_board[5][5] = std::make_shared<Warrior>(EPieceRole::Defender);
     m_board[5][6] = std::make_shared<Warrior>(EPieceRole::Defender);
+    m_board[5][7] = std::make_shared<Warrior>(EPieceRole::Defender);
 
     m_board[6][4] = std::make_shared<Warrior>(EPieceRole::Defender);
     m_board[6][5] = std::make_shared<Warrior>(EPieceRole::Defender);
