@@ -64,8 +64,8 @@ IPieceInfoPtr Game::GetPieceInfo(int i, int j) const
 Position Game::ConvertToPos(const std::string& pos)
 {
 	Position convertedPos;
-	convertedPos.second = pos[0] - 'A' + 1;
-	convertedPos.first = 9 - (pos[1] - '0');
+	convertedPos.first = pos[1] - '0' - 1; // linie
+	convertedPos.second = pos[0] - 'A';   // coloana
 	return convertedPos;
 }
 
