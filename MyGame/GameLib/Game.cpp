@@ -4,7 +4,7 @@ Game::Game() : m_turn(0)
 {
 
 }
-
+ 
 IGamePtr IGame::Produce()
 {
 	return std::make_shared<Game>();
@@ -17,7 +17,7 @@ Board Game::GetBoard() const
 
 void Game::Play()
 {
-	std::cout << "Test";
+	//std::cout << "Test";
 }
 
 EPlayer Game::GetWinner() const
@@ -32,14 +32,6 @@ EPlayer Game::GetWinner() const
 	return EPlayer::None;
 }
 
-EPlayer Game::GetCurrentPlayer() const
-{
-	if (m_turn)
-		return EPlayer::Attacker;
-	return EPlayer::Defender;
-
-}
-
 bool Game::IsGameOver() const
 {
 	EPieceRole role;
@@ -50,6 +42,14 @@ bool Game::IsGameOver() const
 	/*if (m_board.IsCheckmate(role))
 		return true;*/
 	return false;
+}
+
+EPlayer Game::GetCurrentPlayer() const
+{
+	if (m_turn)
+		return EPlayer::Attacker;
+	return EPlayer::Defender;
+
 }
 
 IPieceInfoPtr Game::GetPieceInfo(int i, int j) const

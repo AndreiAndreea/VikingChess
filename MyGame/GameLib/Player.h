@@ -5,5 +5,4 @@ public:
 	bool attacker;
 	Player(bool attacker);
 	bool isAttacker();
-
 };

@@ -18,7 +18,7 @@ public:
 	EPieceType GetType() const override;
 
 	bool Is(EPieceType type, EPieceRole role) const override;
-	bool IsOpposite(EPieceRole role, std::initializer_list<EPieceType> list) const;
+	bool IsOpposite(EPieceRole role, std::vector<EPieceType> list) const;
 	
 private:
 	EPieceType m_type;

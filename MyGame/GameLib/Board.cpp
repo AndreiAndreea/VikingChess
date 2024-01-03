@@ -1,6 +1,6 @@
 #include "Board.h"
 #include <stdexcept>
-#include<iostream>
+#include <iostream>
 
 Board::Board() {
     InitializeBoard();
@@ -135,6 +135,17 @@ void Board::SetPieceToNullptr(const Position& pos)
 {
     m_board[pos.first][pos.second] = nullptr;
 }
+
+static bool IsOpposite(PiecePtr piece, EPieceRole role, std::vector<EPieceType> types)
+{
+    if (!piece)
+        return false;
+    if(piece->IsOpposite(role, types))
+		return true;
+
+    return false;
+}
+
 
 bool Board::MakeMove(Position startPos, Position endPos)
 {

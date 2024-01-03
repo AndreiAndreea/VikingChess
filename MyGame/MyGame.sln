@@ -4,10 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameConsole", "GameConsole\GameConsole.vcxproj", "{BED62BC9-06A4-4AA7-A56C-D9405839D556}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A8AAFE25-6908-45BB-81BB-21E7005E0343} = {A8AAFE25-6908-45BB-81BB-21E7005E0343}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameLib", "GameLib\GameLib.vcxproj", "{A8AAFE25-6908-45BB-81BB-21E7005E0343}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameTests", "GameTests\GameTests.vcxproj", "{C12AD4AF-3CCA-4FC5-B227-0FF9564F6373}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A8AAFE25-6908-45BB-81BB-21E7005E0343} = {A8AAFE25-6908-45BB-81BB-21E7005E0343}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

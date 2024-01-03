@@ -1,8 +1,10 @@
 #pragma once
-#include<iostream>
+//#include<iostream>
+
+#include "IGame.h"
 #include "Board.h"
 #include "Player.h"
-#include "IGame.h"
+
 
 class PieceInfo : public IPieceInfo
 {

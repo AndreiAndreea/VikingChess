@@ -4,7 +4,6 @@
 #include "King.h"
 #include "Warrior.h"
 
-
 #include<memory>
 #include<vector>
 

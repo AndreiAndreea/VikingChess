@@ -1,7 +1,9 @@
 #include <iostream>
 #include <iomanip>
+//#include <IGame.h>
 
 #include "IGame.h"
+#include "Game.h"
 
 std::string PieceToStr(IPieceInfoPtr pieceInfo)
 {
@@ -11,7 +13,7 @@ std::string PieceToStr(IPieceInfoPtr pieceInfo)
 	{
 	case EPieceType::King:
 		result = "  K";
-		break;
+		break; 
 	case EPieceType::Warrior:
 		result = "  W";
 		break;
@@ -63,8 +65,9 @@ void PrintBoard(const IGamePtr& game) {
 
 int main()
 {
+	std::cout << "it works";
 	IGamePtr game = IGame::Produce();
-	PrintBoard(game);
+	/*PrintBoard(game);
 	std::cout << "\n";
 	while (game->IsGameOver() == false)
 	{
@@ -83,7 +86,7 @@ int main()
 		std::cout << "\n";
 	}
 
-	std::cout << "Winner is: " << PlayerToStr(game->GetWinner()) << " !!!";
+	std::cout << "Winner is: " << PlayerToStr(game->GetWinner()) << " !!!";*/
 
 	return 0;
 }
