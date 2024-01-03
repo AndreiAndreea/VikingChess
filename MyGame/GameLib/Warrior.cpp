@@ -10,20 +10,12 @@ Warrior::Warrior(EPieceRole role)
 
 bool Warrior::CanMove(Position startPos, Position endPos, const Board& board)
 {
-	EPieceRole role = GetRole();
+	PositionList possibleMoves;
+	possibleMoves = GetPossibleMoves(startPos, board);
+	if (std::find(possibleMoves.begin(), possibleMoves.end(), endPos) != possibleMoves.end())
+		return true;
 
-	//checking the direction of the movement
-//trebuie sa implementam daca miscarea e una valida
-	if (role == EPieceRole::Attacker) 
-	{
-
-	}
-	else
-	{
-
-	}
-
-	return true;
+	return false;
 }
 
 
@@ -31,18 +23,33 @@ PositionList Warrior::GetPossibleMoves(Position piecePos, const Board& board)
 {
 	PositionList possibleMoves;
 
+	// check left
+	for (int j = piecePos.second - 1; j >= 0 && board.GetBoard()[piecePos.first][j] != nullptr; j--)
+	{
+		if (board.GetBoard()[piecePos.first][j] == nullptr)
+			possibleMoves.push_back(Position(piecePos.first, j));
+	}
 
-	//for (int i = piecePos.first - 1; i <= piecePos.first + 1; i++)
-	//	for (int j = piecePos.second - 1; j <= piecePos.second + 1; j++)
-	//	{
-	//		if (i >= 1 && i <= 8 && j <= 8 && j >= 1)
-	//		{
-	//			if (board.GetBoard()[i][j] != nullptr && board.GetBoard()[i][j]->GetColor() != GetColor() && !VerifyKingMovmentCheck(piecePos, Position(i, j), board))
-	//				possibleMoves.push_back(Position(i, j));
-	//			if (board.GetBoard()[i][j] == nullptr && !VerifyKingMovmentCheck(piecePos, Position(i, j), board))
-	//				possibleMoves.push_back(Position(i, j));
-	//		}
+	// check right
+	for (int j = piecePos.second + 1; j < 11 && board.GetBoard()[piecePos.first][j] != nullptr; j++)
+	{
+		if (board.GetBoard()[piecePos.first][j] == nullptr)
+			possibleMoves.push_back(Position(piecePos.first, j));
+	}
 
-	//	}
+	// check up
+	for (int i = piecePos.first + 1; i < 11 && board.GetBoard()[i][piecePos.second] != nullptr; i++)
+	{
+		if (board.GetBoard()[i][piecePos.second] == nullptr)
+			possibleMoves.push_back(Position(i, piecePos.second));
+	}
+
+	//check down
+	for (int i = piecePos.first - 1; i >= 0 && board.GetBoard()[i][piecePos.second] != nullptr; i--)
+	{
+		if (board.GetBoard()[i][piecePos.second] == nullptr)
+			possibleMoves.push_back(Position(i, piecePos.second));
+	}
+
 	return possibleMoves;
 }

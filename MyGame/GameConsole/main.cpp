@@ -35,13 +35,19 @@ void PrintBoard(const IGamePtr& game) {
 	const std::string resetColor = "\033[0m";
 	const std::string blackColor = "\033[30m";
 	const std::string lightTextColor = "\033[37m"; // Lighter text color for white pieces
+	const std::string backgroundColorBorder = "\033[48;2;255;255;255m"; // White background for the border
 	const std::string backgroundColor1 = "\033[48;2;205;133;63m"; // Lighter brown background for the light squares (RGB: 205, 133, 63)
 	const std::string backgroundColor2 = "\033[48;2;139;69;19m"; // Darker brown background for the dark squares (RGB: 139, 69, 19)
 
 	const int cellWidth = 5; // Width of each cell (including spaces)
+	int verticalIndex = 11;
+	std::string horizontalIndex = "ABCDEFGHIJK";
 
 	for (int i = 0; i < 11; i++)
 	{
+		std::cout << backgroundColorBorder << blackColor << std::left << std::setw(cellWidth) << verticalIndex << resetColor;
+		verticalIndex--;
+
 		for (int j = 0; j < 11; j++)
 		{
 			auto pieceInfo = game->GetPieceInfo(i, j);
@@ -59,6 +65,11 @@ void PrintBoard(const IGamePtr& game) {
 			std::cout << bgColor << textColor << std::left << std::setw(cellWidth) << pieceStr << resetColor;
 		}
 		std::cout << "\n";
+	}
+	std::cout << backgroundColorBorder << blackColor<< std::left << std::setw(cellWidth) << " " << resetColor;
+	for (int i = 0; i < 11; i++)
+	{
+		std::cout << backgroundColorBorder << blackColor << std::left << std::setw(cellWidth) << horizontalIndex[i] << resetColor;
 	}
 }
 
