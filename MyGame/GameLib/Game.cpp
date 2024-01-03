@@ -98,6 +98,7 @@ bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr
 
 	if (IsInputValid(startPos, endPos) && m_board.MakeMove(startPos, endPos))
 	{
+		//se schimba randul si se returneaza true daca mutarea a fost valida
 		m_turn = 1 - m_turn;
 		return true;
 	}

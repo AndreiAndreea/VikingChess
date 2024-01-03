@@ -9,8 +9,8 @@
 
 enum class EPlayer
 {
-	Attacker,
 	Defender,
+	Attacker,
 	None
 };
 

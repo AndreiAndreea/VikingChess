@@ -28,13 +28,13 @@ Board::Board(ConfigMatrix piecePos)
 Board::Board(int)
 {
     m_board.resize(11);
-    for (int i = 1; i <= 11; i++)
+    for (int i = 1; i <= 10; i++)
     {
         m_board[i].resize(11);
     }
 
-    for (int x = 1; x <= 11; x++)
-        for (int y = 1; y <= 11; y++)
+    for (int x = 1; x <= 10; x++)
+        for (int y = 1; y <= 10; y++)
             m_board[x][y] = nullptr;
 }
 

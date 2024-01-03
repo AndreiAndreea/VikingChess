@@ -67,7 +67,7 @@ int main()
 	IGamePtr game = IGame::Produce();
 	PrintBoard(game);
 	std::cout << "\n";
-	/*while (game->IsGameOver() == false)
+	while (game->IsGameOver() == false)
 	{
 		std::string startPos, endPos;
 		std::cout << "Insert your move " << PlayerToStr(game->GetCurrentPlayer()) << ": ";
@@ -84,7 +84,7 @@ int main()
 		std::cout << "\n";
 	}
 
-	std::cout << "Winner is: " << PlayerToStr(game->GetWinner()) << " !!!";*/
+	std::cout << "Winner is: " << PlayerToStr(game->GetWinner()) << " !!!";
 
 	return 0;
 }
