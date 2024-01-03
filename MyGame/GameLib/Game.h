@@ -21,7 +21,6 @@ private:
 
 class Game : public IGame
 {
-
 public:
 	Game();
 

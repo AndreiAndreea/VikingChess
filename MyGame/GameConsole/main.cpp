@@ -1,6 +1,5 @@
 #include <iostream>
 #include <iomanip>
-//#include <IGame.h>
 
 #include "IGame.h"
 #include "Game.h"
@@ -67,9 +66,9 @@ int main()
 {
 	std::cout << "it works";
 	IGamePtr game = IGame::Produce();
-	/*PrintBoard(game);
+	PrintBoard(game);
 	std::cout << "\n";
-	while (game->IsGameOver() == false)
+	/*while (game->IsGameOver() == false)
 	{
 		std::string startPos, endPos;
 		std::cout << "Insert your move " << PlayerToStr(game->GetCurrentPlayer()) << ": ";

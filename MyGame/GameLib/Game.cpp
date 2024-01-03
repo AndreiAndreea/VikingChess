@@ -1,4 +1,5 @@
 #include "Game.h"
+#include<iostream>
 
 Game::Game() : m_turn(0)
 {
@@ -17,7 +18,7 @@ Board Game::GetBoard() const
 
 void Game::Play()
 {
-	//std::cout << "Test";
+	std::cout << "Test";
 }
 
 EPlayer Game::GetWinner() const
