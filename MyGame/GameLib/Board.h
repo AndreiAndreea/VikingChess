@@ -8,7 +8,6 @@
 #include<memory>
 #include<vector>
 
-//using Position = std::pair<int, int>;
 using PieceMatrix = std::vector<std::vector<PiecePtr>>;
 using ConfigMatrix = std::vector<std::pair<PiecePtr, Position>>;
 

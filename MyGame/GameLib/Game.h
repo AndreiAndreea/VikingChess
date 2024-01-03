@@ -27,6 +27,7 @@ public:
 
 	//methods from interface IGame
 	void Play() override;
+
 	EPlayer GetWinner() const override;
 	EPlayer GetCurrentPlayer() const override;
 	bool IsGameOver() const override;

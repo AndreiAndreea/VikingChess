@@ -5,16 +5,20 @@ Game::Game() : m_turn(0)
 
 }
 
-Board Game::GetBoard() const
-{
-	return m_board;
-}
-
 IGamePtr IGame::Produce()
 {
 	return std::make_shared<Game>();
 }
 
+Board Game::GetBoard() const
+{
+	return m_board;
+}
+
+void Game::Play()
+{
+	std::cout << "Test";
+}
 
 EPlayer Game::GetWinner() const
 {
@@ -24,7 +28,7 @@ EPlayer Game::GetWinner() const
 			return EPlayer::Attacker;
 		return EPlayer::Defender;
 	}
-	//exception or 
+
 	return EPlayer::None;
 }
 
@@ -100,10 +104,8 @@ bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr
 
 }
 
-
 PieceInfo::PieceInfo(EPieceType type, EPieceRole role)
-	: m_type(type)
-	, m_role(role)
+	: m_type(type),m_role(role)
 {
 
 }
@@ -116,9 +118,4 @@ EPieceRole PieceInfo::GetRole() const
 EPieceType PieceInfo::GetType() const
 {
 	return m_type;
-}
-
-void Game::Play()
-{
-	std::cout << "Test";
 }
