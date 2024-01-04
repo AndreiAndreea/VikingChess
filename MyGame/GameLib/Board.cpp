@@ -155,6 +155,11 @@ static bool IsOpposite(PiecePtr piece, EPieceRole role, std::vector<EPieceType> 
 bool Board::MakeMove(Position startPos, Position endPos)
 {
 	auto piece = m_board[startPos.first][startPos.second];
+	if (IsKingInCheckmate())
+	{
+		std::cout << "Regele e in sah mat!";
+		return false;
+	}
 	if (piece->CanMove(startPos, endPos, *this))
 	{
 		if (piece->GetType() != EPieceType::King)
@@ -425,4 +430,17 @@ bool Board::IsKingThreatened()
 {
 	King king = King(EPieceRole::Defender);
 	return king.IsThreatened(GetKingPositionOnBoard(), *this);
+}
+
+bool Board::IsKingInCheckmate()
+{
+	Position kingPos = GetKingPositionOnBoard();
+	King king = King(EPieceRole::Defender);
+
+	// Check if there is no possible move for the king (to escape threaten)
+	if (king.IsThreatened(GetKingPositionOnBoard(), *this) && 
+		king.GetPossibleMoves(kingPos, *this).size() == 0)
+		return true;
+
+	return false;
 }

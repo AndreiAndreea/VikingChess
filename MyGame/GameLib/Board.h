@@ -31,6 +31,7 @@ public:
 
 	Position GetKingPositionOnBoard() const;
 	bool IsKingThreatened();
+	bool IsKingInCheckmate();
 
 private:
 	PieceMatrix m_board;
