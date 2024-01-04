@@ -33,6 +33,7 @@ Board::Board(int)
 		m_board[i].resize(12);
 	}
 
+	//initilizare casute cu nullptr
 	for (int x = 1; x <= 11; x++)
 		for (int y = 1; y <= 11; y++)
 			m_board[x][y] = nullptr;
