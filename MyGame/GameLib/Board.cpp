@@ -175,7 +175,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			// Check opponent horizontally left
 			if (endPos.second - 2 >= 1 &&
 				m_board[endPos.first][endPos.second - 1] && m_board[endPos.first][endPos.second - 2] &&
-				IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior ,EPieceType::King }) &&
+				IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }) &&
 				!IsOpposite(m_board[endPos.first][endPos.second - 2], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 			{
 				SetPieceToNullptr(Position(endPos.first, endPos.second - 1));
@@ -184,7 +184,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			// Check opponent horizontally right
 			if (endPos.second + 2 <= 11 &&
 				m_board[endPos.first][endPos.second + 1] && m_board[endPos.first][endPos.second + 2] &&
-				IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior ,EPieceType::King }) &&
+				IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }) &&
 				!IsOpposite(m_board[endPos.first][endPos.second + 2], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 			{
 				SetPieceToNullptr(Position(endPos.first, endPos.second + 1));
@@ -193,7 +193,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			// Check opponent vertically up
 			if (endPos.first - 2 >= 1 &&
 				m_board[endPos.first - 1][endPos.second] && m_board[endPos.first - 2][endPos.second] &&
-				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior ,EPieceType::King }) &&
+				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
 				!IsOpposite(m_board[endPos.first - 2][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 			{
 				SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
@@ -202,7 +202,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			// Check opponent vertically down
 			if (endPos.first + 2 <= 11 &&
 				m_board[endPos.first + 1][endPos.second] && m_board[endPos.first + 2][endPos.second] &&
-				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior, EPieceType::King }) &&
+				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
 				!IsOpposite(m_board[endPos.first + 2][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 			{
 				SetPieceToNullptr(Position(endPos.first + 1, endPos.second));
@@ -213,7 +213,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			// Top left corner - trap from bottom
 			if (endPos.first == 2 && endPos.second == 1 &&
 				m_board[endPos.first - 1][endPos.second] && m_board[endPos.first - 1][endPos.second + 1] &&
-				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
+				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
 				!IsOpposite(m_board[endPos.first - 1][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 			{
 				SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
@@ -221,7 +221,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			else // - trap from right
 				if (endPos.first == 1 && endPos.second == 2 &&
 					m_board[endPos.first][endPos.second - 1] && m_board[endPos.first + 1][endPos.second - 1] &&
-					IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
+					IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }) &&
 					!IsOpposite(m_board[endPos.first + 1][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 				{
 					SetPieceToNullptr(Position(endPos.first, endPos.second - 1));
@@ -230,7 +230,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			// Top right corner - trap from bottom
 			if (endPos.first == 2 && endPos.second == 11 &&
 				m_board[endPos.first - 1][endPos.second] && m_board[endPos.first - 1][endPos.second - 1] &&
-				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
+				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
 				!IsOpposite(m_board[endPos.first - 1][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 			{
 				SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
@@ -238,7 +238,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			else // - trap from left
 				if (endPos.first == 1 && endPos.second == 10 &&
 					m_board[endPos.first][endPos.second + 1] && m_board[endPos.first + 1][endPos.second + 1] &&
-					IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
+					IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }) &&
 					!IsOpposite(m_board[endPos.first + 1][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 				{
 					SetPieceToNullptr(Position(endPos.first, endPos.second + 1));
@@ -247,7 +247,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			// Bottom left corner - trap from top
 			if (endPos.first == 10 && endPos.second == 1 &&
 				m_board[endPos.first + 1][endPos.second] && m_board[endPos.first + 1][endPos.second + 1] &&
-				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
+				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
 				!IsOpposite(m_board[endPos.first + 1][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 			{
 				SetPieceToNullptr(Position(endPos.first + 1, endPos.second));
@@ -255,7 +255,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			else // - trap from right
 				if (endPos.first == 11 && endPos.second == 2 &&
 					m_board[endPos.first][endPos.second - 1] && m_board[endPos.first - 1][endPos.second - 1] &&
-					IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
+					IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }) &&
 					!IsOpposite(m_board[endPos.first - 1][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 				{
 					SetPieceToNullptr(Position(endPos.first, endPos.second - 1));
@@ -264,7 +264,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			// Bottom right corner - trap from top
 			if (endPos.first == 10 && endPos.second == 11 &&
 				m_board[endPos.first + 1][endPos.second] && m_board[endPos.first + 1][endPos.second - 1] &&
-				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
+				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
 				!IsOpposite(m_board[endPos.first + 1][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 			{
 				SetPieceToNullptr(Position(endPos.first + 1, endPos.second));
@@ -272,7 +272,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			else // trap from left
 				if (endPos.first == 11 && endPos.second == 10 &&
 					m_board[endPos.first][endPos.second + 1] && m_board[endPos.first - 1][endPos.second + 1] &&
-					IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
+					IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }) &&
 					!IsOpposite(m_board[endPos.first - 1][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 				{
 					SetPieceToNullptr(Position(endPos.first, endPos.second + 1));
