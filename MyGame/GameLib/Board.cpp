@@ -235,6 +235,16 @@ bool Board::MakeMove(Position startPos, Position endPos)
 				{
 					SetPieceToNullptr(Position(endPos.first, endPos.second - 1));
 				}
+
+			// Top right corner - trap from bottom
+			if (endPos.first == 2 && endPos.second == 11 &&
+				m_board[endPos.first - 1][endPos.second] && m_board[endPos.first - 1][endPos.second - 1] &&
+				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
+				!IsOpposite(m_board[endPos.first - 1][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
+			{
+				SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
+			}
+				
 		}
 		return true;
 	}
