@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include<conio.h>
 
 #include "IGame.h"
 #include "Game.h"
@@ -91,6 +92,8 @@ int main()
 			std::cin >> startPos; std::cin >> endPos;
 			std::cout << "\n";
 		}
+		//clear screen before print new board
+		system("cls");
 		PrintBoard(game);
 		std::cout << "\n";
 	}
