@@ -30,7 +30,7 @@ public:
 	void SetPieceToNullptr(const Position& pos);
 
 	Position GetKingPositionOnBoard() const;
-	bool IsKingThreatened(Position startPos, Position endPos, EPieceRole pieceRole) const;
+	bool IsKingThreatened();
 
 private:
 	PieceMatrix m_board;

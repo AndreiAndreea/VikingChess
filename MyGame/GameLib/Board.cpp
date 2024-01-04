@@ -157,15 +157,16 @@ bool Board::MakeMove(Position startPos, Position endPos)
 	auto piece = m_board[startPos.first][startPos.second];
 	if (piece->CanMove(startPos, endPos, *this))
 	{
+		if (piece->GetType() != EPieceType::King)
+		{
+			if (IsKingThreatened())
+			{
+				std::cout << "Regele e in sah! Nu se poate face mutarea. Muta regele!";
+				return false;
+			}
+		}
 		if (piece->GetType() == EPieceType::Warrior)
 		{
-			// Check if king is in check before doinf any move - TO DO
-			//if (IsKingLeftInCheck(startPos, endPos, piece->GetColor()))
-			//	{
-			//		std::cout << "Regele e in sah! Nu se poate face mutarea.";
-			//		return false;
-			//	}
-
 			// Move warrior to new position
 			SetPiece(endPos, piece->GetRole(), piece->GetType());
 			SetPieceToNullptr(startPos);
@@ -420,51 +421,8 @@ Position Board::GetKingPositionOnBoard() const
 	return kingPos;
 }
 
-bool Board::IsKingThreatened(Position startPos, Position endPos, EPieceRole pieceRole) const
+bool Board::IsKingThreatened()
 {
-	Position kingPos = GetKingPositionOnBoard();
-
-	// Check if king is in check - threatend by 3 attackers
-	// down pos open - 3 pos closed
-	if (kingPos.second - 1 >= 1 && kingPos.first - 1 >= 1 && kingPos.second + 1 <= 11)
-	{
-		if (m_board[kingPos.first][kingPos.second - 1]->Is(EPieceType::Warrior, EPieceRole::Attacker) &&
-			m_board[kingPos.first - 1][kingPos.second]->Is(EPieceType::Warrior, EPieceRole::Attacker) &&
-			m_board[kingPos.first][kingPos.second + 1]->Is(EPieceType::Warrior, EPieceRole::Attacker))
-		{
-			for (int i = kingPos.first + 2; i <= 11; i++)
-			{
-				if (m_board[i][kingPos.second]->Is(EPieceType::Warrior, EPieceRole::Attacker))
-				{
-					return true;
-				}
-				else if (m_board[i][kingPos.second]->Is(EPieceType::Warrior, EPieceRole::Defender))
-				{
-					return false;
-				}
-			}
-		}
-	}
-	// left pos open - 3 pos closed
-	if (kingPos.second - 1 >= 1 && kingPos.first + 1 >= 1 && kingPos.second + 1 <= 11)
-	{
-		if (m_board[kingPos.first - 1][kingPos.second]->Is(EPieceType::Warrior, EPieceRole::Attacker) &&
-			m_board[kingPos.first][kingPos.second + 1]->Is(EPieceType::Warrior, EPieceRole::Attacker) &&
-			m_board[kingPos.first + 1][kingPos.second]->Is(EPieceType::Warrior, EPieceRole::Attacker))
-		{
-			for (int i = kingPos.second - 2; i >= 1; i--)
-			{
-				if (m_board[kingPos.first][i]->Is(EPieceType::Warrior, EPieceRole::Attacker))
-				{
-					return true;
-				}
-				else if (m_board[kingPos.first][i]->Is(EPieceType::Warrior, EPieceRole::Defender))
-				{
-					return false;
-				}
-			}
-		}
-	}
-
-
+	King king = King(EPieceRole::Defender);
+	return king.IsThreatened(GetKingPositionOnBoard(), *this);
 }
