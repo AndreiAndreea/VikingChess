@@ -159,6 +159,13 @@ bool Board::MakeMove(Position startPos, Position endPos)
 	{
 		if (piece->GetType() == EPieceType::Warrior)
 		{
+			// Check if king is in check - TO DO
+			//if (IsKingLeftInCheck(startPos, endPos, piece->GetColor()))
+			//	{
+			//		std::cout << "Regele e in sah! Nu se poate face mutarea.";
+			//		return false;
+			//	}
+
 			// Move warrior to new position
 			SetPiece(endPos, piece->GetRole(), piece->GetType());
 			SetPieceToNullptr(startPos);
@@ -190,7 +197,6 @@ bool Board::MakeMove(Position startPos, Position endPos)
 				!IsOpposite(m_board[endPos.first - 2][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
 			{
 				SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
-
 			}
 
 			// Check opponent vertically down
@@ -273,6 +279,52 @@ bool Board::MakeMove(Position startPos, Position endPos)
 				}
 
 		}
+		else if (piece->GetType() == EPieceType::King)
+		{
+			// Move king to new position
+			SetPiece(endPos, piece->GetRole(), piece->GetType());
+			SetPieceToNullptr(startPos);
+			// ---------------------------------
+
+			// Check if any opponents piece is captured in our sandwich
+			// Check opponent horizontally left
+			if (endPos.second - 2 >= 1 &&
+				m_board[endPos.first][endPos.second - 1] && m_board[endPos.first][endPos.second - 2] &&
+				IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }) &&
+				!IsOpposite(m_board[endPos.first][endPos.second - 2], piece->GetRole(), { EPieceType::Warrior }))
+			{
+				SetPieceToNullptr(Position(endPos.first, endPos.second - 1));
+			}
+
+			// Check opponent horizontally right
+			if (endPos.second + 2 <= 11 &&
+				m_board[endPos.first][endPos.second + 1] && m_board[endPos.first][endPos.second + 2] &&
+				IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }) &&
+				!IsOpposite(m_board[endPos.first][endPos.second + 2], piece->GetRole(), { EPieceType::Warrior }))
+			{
+				SetPieceToNullptr(Position(endPos.first, endPos.second + 1));
+			}
+
+			// Check opponent vertically up
+			if (endPos.first - 2 >= 1 &&
+				m_board[endPos.first - 1][endPos.second] && m_board[endPos.first - 2][endPos.second] &&
+				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
+				!IsOpposite(m_board[endPos.first - 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			{
+				SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
+			}
+
+			// Check opponent vertically down
+			if (endPos.first + 2 <= 11 &&
+				m_board[endPos.first + 1][endPos.second] && m_board[endPos.first + 2][endPos.second] &&
+				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
+				!IsOpposite(m_board[endPos.first + 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			{
+				SetPieceToNullptr(Position(endPos.first + 1, endPos.second));
+			}
+			// ---------------------------------
+		}
+
 		return true;
 	}
 	return false;
