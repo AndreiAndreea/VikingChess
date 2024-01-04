@@ -159,7 +159,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 	{
 		if (piece->GetType() == EPieceType::Warrior)
 		{
-			// Check if king is in check - TO DO
+			// Check if king is in check before doinf any move - TO DO
 			//if (IsKingLeftInCheck(startPos, endPos, piece->GetColor()))
 			//	{
 			//		std::cout << "Regele e in sah! Nu se poate face mutarea.";
@@ -399,17 +399,16 @@ bool Board::MakeMove(Position startPos, Position endPos)
 }
 
 
-bool Board::IsKingInCheck(Position startPos, Position endPos, EPieceRole pieceRole) const
+Position Board::GetKingPositionOnBoard() const
 {
 	Position kingPos;
 
-	// Search king position on board
 	bool found = 0;
 	for (int i = 1; i <= 11 && found == 0; i++)
 	{
 		for (int j = 1; j <= 11 && found == 0; j++)
 		{
-			if (m_board[i][j] && m_board[i][j]->Is(EPieceType::King, pieceRole))
+			if (m_board[i][j] && m_board[i][j]->Is(EPieceType::King, EPieceRole::Defender))
 			{
 				kingPos.first = i;
 				kingPos.second = j;
@@ -417,6 +416,13 @@ bool Board::IsKingInCheck(Position startPos, Position endPos, EPieceRole pieceRo
 			}
 		}
 	}
+
+	return kingPos;
+}
+
+bool Board::IsKingThreatened(Position startPos, Position endPos, EPieceRole pieceRole) const
+{
+	Position kingPos = GetKingPositionOnBoard();
 
 	// Check if king is in check - threatend by 3 attackers
 	// down pos open - 3 pos closed

@@ -29,7 +29,8 @@ public:
 	void SetPiece(const Position& pos, EPieceRole role, EPieceType type);
 	void SetPieceToNullptr(const Position& pos);
 
-	bool IsKingInCheck(Position startPos, Position endPos, EPieceRole pieceRole) const;
+	Position GetKingPositionOnBoard() const;
+	bool IsKingThreatened(Position startPos, Position endPos, EPieceRole pieceRole) const;
 
 private:
 	PieceMatrix m_board;
