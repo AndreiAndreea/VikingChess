@@ -475,5 +475,15 @@ bool Board::IsKingInCheckmate()
 		IsOpposite(m_board[kingPos.first][kingPos.second + 1], GetPiece(Position(kingPos.first, kingPos.second + 1))->GetRole(), { EPieceType::Warrior }))
 		return true;
 
+	// Left border side
+	if (kingPos.first - 1 >= 1 && kingPos.first + 1 <= 11 && kingPos.second + 1 <= 11 &&
+		m_board[kingPos.first - 1][kingPos.second] &&
+		m_board[kingPos.first + 1][kingPos.second] &&
+		m_board[kingPos.first][kingPos.second + 1] &&
+		IsOpposite(m_board[kingPos.first - 1][kingPos.second], GetPiece(Position(kingPos.first - 1, kingPos.second))->GetRole(), { EPieceType::Warrior }) &&
+		IsOpposite(m_board[kingPos.first + 1][kingPos.second], GetPiece(Position(kingPos.first + 1, kingPos.second))->GetRole(), { EPieceType::Warrior }) &&
+		IsOpposite(m_board[kingPos.first][kingPos.second + 1], GetPiece(Position(kingPos.first, kingPos.second + 1))->GetRole(), { EPieceType::Warrior }))
+		return true;
+
 	return false;
 }
