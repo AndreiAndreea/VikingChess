@@ -28,13 +28,13 @@ Board::Board(ConfigMatrix piecePos)
 Board::Board(int)
 {
 	m_board.resize(11);
-	for (int i = 1; i <= 10; i++)
+	for (int i = 1; i <= 11; i++)
 	{
-		m_board[i].resize(11);
+		m_board[i].resize(12);
 	}
 
-	for (int x = 1; x <= 10; x++)
-		for (int y = 1; y <= 10; y++)
+	for (int x = 1; x <= 11; x++)
+		for (int y = 1; y <= 11; y++)
 			m_board[x][y] = nullptr;
 }
 
@@ -43,72 +43,72 @@ Board::Board(const Board& ob)
 	m_board = ob.GetBoard();
 }
 
-//indexarea de la 0 la 10
+//indexarea de la 1 la 11
 void Board::InitializeBoard() {
-	m_board.resize(11);
-	for (int i = 0; i < 11; i++) {
-		m_board[i].resize(11);
+	m_board.resize(12);
+	for (int i = 1; i <= 11; i++) {
+		m_board[i].resize(12);
 	}
 
 	// Initialize empty squares
-	for (int x = 0; x < 11; x++) {
-		for (int y = 0; y < 11; y++) {
+	for (int x = 1; x <= 11; x++) {
+		for (int y = 1; y <= 11; y++) {
 			m_board[x][y] = nullptr;
 		}
 	}
 
 	// Set up attackers (black pieces)
 //N
-	m_board[0][3] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[0][4] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[0][5] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[0][6] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[0][7] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[1][4] = std::make_shared<Warrior>(EPieceRole::Attacker);
 	m_board[1][5] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[1][6] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[1][7] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[1][8] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[2][6] = std::make_shared<Warrior>(EPieceRole::Attacker);
 	//V
-	m_board[3][0] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[4][0] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[5][0] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[6][0] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[7][0] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[4][1] = std::make_shared<Warrior>(EPieceRole::Attacker);
 	m_board[5][1] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[6][1] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[7][1] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[8][1] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[6][2] = std::make_shared<Warrior>(EPieceRole::Attacker);
 	//E
-	m_board[3][10] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[4][10] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[5][10] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[4][11] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[5][11] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[6][11] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[7][11] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[8][11] = std::make_shared<Warrior>(EPieceRole::Attacker);
 	m_board[6][10] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[7][10] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[5][9] = std::make_shared<Warrior>(EPieceRole::Attacker);
 	//S
-	m_board[10][3] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[10][4] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[10][5] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[11][4] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[11][5] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[11][6] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[11][7] = std::make_shared<Warrior>(EPieceRole::Attacker);
+	m_board[11][8] = std::make_shared<Warrior>(EPieceRole::Attacker);
 	m_board[10][6] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[10][7] = std::make_shared<Warrior>(EPieceRole::Attacker);
-	m_board[9][5] = std::make_shared<Warrior>(EPieceRole::Attacker);
 
 
 	// Set up defenders (white pieces)
-	m_board[3][5] = std::make_shared<Warrior>(EPieceRole::Defender);
-
-	m_board[4][4] = std::make_shared<Warrior>(EPieceRole::Defender);
-	m_board[4][5] = std::make_shared<Warrior>(EPieceRole::Defender);
 	m_board[4][6] = std::make_shared<Warrior>(EPieceRole::Defender);
 
-	m_board[5][3] = std::make_shared<Warrior>(EPieceRole::Defender);
-	m_board[5][4] = std::make_shared<Warrior>(EPieceRole::Defender);
 	m_board[5][5] = std::make_shared<Warrior>(EPieceRole::Defender);
 	m_board[5][6] = std::make_shared<Warrior>(EPieceRole::Defender);
 	m_board[5][7] = std::make_shared<Warrior>(EPieceRole::Defender);
 
 	m_board[6][4] = std::make_shared<Warrior>(EPieceRole::Defender);
 	m_board[6][5] = std::make_shared<Warrior>(EPieceRole::Defender);
-	m_board[6][6] = std::make_shared<Warrior>(EPieceRole::Defender);
+	m_board[6][5] = std::make_shared<Warrior>(EPieceRole::Defender);
+	m_board[6][7] = std::make_shared<Warrior>(EPieceRole::Defender);
+	m_board[6][8] = std::make_shared<Warrior>(EPieceRole::Defender);
 
 	m_board[7][5] = std::make_shared<Warrior>(EPieceRole::Defender);
+	m_board[7][6] = std::make_shared<Warrior>(EPieceRole::Defender);
+	m_board[7][7] = std::make_shared<Warrior>(EPieceRole::Defender);
+
+	m_board[8][6] = std::make_shared<Warrior>(EPieceRole::Defender);
 
 	// Set up the king
-	m_board[5][5] = std::make_shared<King>(EPieceRole::Defender);
+	m_board[6][6] = std::make_shared<King>(EPieceRole::Defender);
 }
 
 PieceMatrix Board::GetBoard() const
@@ -162,69 +162,70 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			
 			// Check if the current piece is in a sandwich -> therefore it is captured
 			// Surrounded vertically
-			if (IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
-				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-			{
-				SetPieceToNullptr(endPos);
-			}
-			// Surrounded horizontally
-			if (IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }) &&
-				IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }))
-			{
-				SetPieceToNullptr(endPos);
-			}
-			// ---------------------------------
+			//if (IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
+			//	IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			//{
+			//	SetPieceToNullptr(endPos);
+			//}
+			//// Surrounded horizontally
+			//if (IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }) &&
+			//	IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }))
+			//{
+			//	SetPieceToNullptr(endPos);
+			//}
+			//// ---------------------------------
 
-			// Check if any opponents piece is captured in our sandwich
-			// Check opponent left
-			if (endPos.second - 1 >= 0 &&
-				IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }))
-			{
-				// Check if the piece is in a sandwich
-				if (endPos.second - 2 >= 0 &&
-					!IsOpposite(m_board[endPos.first][endPos.second - 2], piece->GetRole(), { EPieceType::Warrior }))
-				{
-					SetPieceToNullptr(Position(endPos.first, endPos.second - 1));
-				}
-			}
+			//// Check if any opponents piece is captured in our sandwich
+			//// Check opponent left
+			//if (endPos.second - 1 >= 0 &&
+			//	IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }))
+			//{
+			//	// Check if the piece is in a sandwich
+			//	if (endPos.second - 2 >= 0 &&
+			//		!IsOpposite(m_board[endPos.first][endPos.second - 2], piece->GetRole(), { EPieceType::Warrior }))
+			//	{
+			//		SetPieceToNullptr(Position(endPos.first, endPos.second - 1));
+			//	}
+			//}
 
-			// Check opponent right
-			if (endPos.second + 1 < 11 &&
-				IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }))
-			{
-				// Check if the piece is in a sandwich
-				if (endPos.second + 2 < 11 &&
-					!IsOpposite(m_board[endPos.first][endPos.second + 2], piece->GetRole(), { EPieceType::Warrior }))
-				{
-					SetPieceToNullptr(Position(endPos.first, endPos.second + 1));
-				}
-			}
+			//// Check opponent right
+			//if (endPos.second + 1 < 11 &&
+			//	IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }))
+			//{
+			//	// Check if the piece is in a sandwich
+			//	if (endPos.second + 2 < 11 &&
+			//		!IsOpposite(m_board[endPos.first][endPos.second + 2], piece->GetRole(), { EPieceType::Warrior }))
+			//	{
+			//		SetPieceToNullptr(Position(endPos.first, endPos.second + 1));
+			//	}
+			//}
 
-			// Check opponent up
-			if (endPos.first - 1 >= 0 &&
-				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-			{
-				// Check if the piece is in a sandwich
-				if (endPos.first - 2 >= 0 &&
-					!IsOpposite(m_board[endPos.first - 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-				{
-					SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
+			//// Check opponent up
+			//if (endPos.first - 1 >= 0 &&
+			//	IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			//{
+			//	// Check if the piece is in a sandwich
+			//	if (endPos.first - 2 >= 0 &&
+			//		!IsOpposite(m_board[endPos.first - 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			//	{
+			//		SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
 
-				}
-			}
+			//	}
+			//}
 
-			// Check opponent down
-			if (endPos.first + 1 < 11 &&
-				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-			{
-				// Check if the piece is in a sandwich
-				if (endPos.first + 2 < 11 &&
-					!IsOpposite(m_board[endPos.first + 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-				{
-					SetPieceToNullptr(Position(endPos.first + 1, endPos.second));
-				}
-			}
+			//// Check opponent down
+			//if (endPos.first + 1 < 11 &&
+			//	IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			//{
+			//	// Check if the piece is in a sandwich
+			//	if (endPos.first + 2 < 11 &&
+			//		!IsOpposite(m_board[endPos.first + 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			//	{
+			//		SetPieceToNullptr(Position(endPos.first + 1, endPos.second));
+			//	}
+			//}
 		}
+		return true;
 
 	}
 

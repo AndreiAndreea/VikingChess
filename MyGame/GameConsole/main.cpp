@@ -43,12 +43,12 @@ void PrintBoard(const IGamePtr& game) {
 	int verticalIndex = 11;
 	std::string horizontalIndex = "ABCDEFGHIJK";
 
-	for (int i = 0; i < 11; i++)
+	for (int i = 1; i <= 11; i++)
 	{
 		std::cout << backgroundColorBorder << blackColor << std::left << std::setw(cellWidth) << verticalIndex << resetColor;
 		verticalIndex--;
 
-		for (int j = 0; j < 11; j++)
+		for (int j = 1; j <= 11; j++)
 		{
 			auto pieceInfo = game->GetPieceInfo(i, j);
 
