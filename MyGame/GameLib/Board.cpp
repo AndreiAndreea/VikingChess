@@ -164,26 +164,6 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			SetPieceToNullptr(startPos);
 			// ---------------------------------
 
-			// Check if the current piece is in a sandwich -> therefore it is captured
-			// Surrounded vertically
-			if (endPos.first - 1 >= 1 && endPos.first + 1 <= 11 &&
-				m_board[endPos.first - 1][endPos.second] && m_board[endPos.first + 1][endPos.second] &&
-				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
-				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
-			{
-				SetPieceToNullptr(endPos);
-			}
-			else
-				// Surrounded horizontally
-				if (endPos.second - 1 >= 1 && endPos.second + 1 <= 11 &&
-					m_board[endPos.first][endPos.second - 1] && m_board[endPos.first][endPos.second + 1] &&
-					IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }) &&
-					IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior,EPieceType::King }))
-				{
-					SetPieceToNullptr(endPos);
-				}
-			// ---------------------------------
-
 			// Check if any opponents piece is captured in our sandwich
 			// Check opponent horizontally left
 			if (endPos.second - 2 >= 1 &&
