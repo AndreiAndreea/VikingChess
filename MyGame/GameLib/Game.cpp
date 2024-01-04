@@ -5,7 +5,7 @@ Game::Game() : m_turn(0)
 {
 
 }
- 
+
 IGamePtr IGame::Produce()
 {
 	return std::make_shared<Game>();
@@ -64,8 +64,19 @@ IPieceInfoPtr Game::GetPieceInfo(int i, int j) const
 Position Game::ConvertToPos(const std::string& pos)
 {
 	Position convertedPos;
-	convertedPos.first = 11-(pos[1] - '0')+1; // linie
-	convertedPos.second = pos[0] - 'A'+1;   // coloana
+	if (pos.length() == 2)
+	{
+		convertedPos.first = 11 - (pos[1] - '0') + 1; // linie
+		convertedPos.second = pos[0] - 'A' + 1;   // coloana
+	}
+	else
+	{
+		//coloana 
+		convertedPos.second = pos[0] - 'A' + 1;
+		//linie - pos[1] si pos[2]
+		convertedPos.first = 11 - ((pos[1] - '0') * 10 + (pos[2] - '0')) + 1;
+	}
+
 	return convertedPos;
 }
 
@@ -107,7 +118,7 @@ bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr
 }
 
 PieceInfo::PieceInfo(EPieceType type, EPieceRole role)
-	: m_type(type),m_role(role)
+	: m_type(type), m_role(role)
 {
 
 }
