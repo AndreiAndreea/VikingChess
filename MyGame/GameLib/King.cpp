@@ -23,21 +23,18 @@ PositionList King::GetPossibleMoves(Position piecePos, const Board& board)
 {
 	PositionList possibleMoves;
 
-	// check left
-	for (int j = piecePos.second - 1; j >= 1 && board.GetBoard()[piecePos.first][j] == nullptr; j--)
-		possibleMoves.push_back(Position(piecePos.first, j));
 
-	// check right
-	for (int j = piecePos.second + 1; j <= 11 && board.GetBoard()[piecePos.first][j] == nullptr; j++)
-		possibleMoves.push_back(Position(piecePos.first, j));
+	//for (int i = piecePos.first - 1; i <= piecePos.first + 1; i++)
+	//	for (int j = piecePos.second - 1; j <= piecePos.second + 1; j++)
+	//	{
+	//		if (i >= 1 && i <= 8 && j <= 8 && j >= 1)
+	//		{
+	//			if (board.GetBoard()[i][j] != nullptr && board.GetBoard()[i][j]->GetColor() != GetColor() && !VerifyKingMovmentCheck(piecePos, Position(i, j), board))
+	//				possibleMoves.push_back(Position(i, j));
+	//			if (board.GetBoard()[i][j] == nullptr && !VerifyKingMovmentCheck(piecePos, Position(i, j), board))
+	//				possibleMoves.push_back(Position(i, j));
+	//		}
 
-	// check up
-	for (int i = piecePos.first - 1; i >= 1 && board.GetBoard()[i][piecePos.second] == nullptr; i--)
-		possibleMoves.push_back(Position(i, piecePos.second));
-
-	// check down
-	for (int i = piecePos.first + 1; i <= 11 && board.GetBoard()[i][piecePos.second] == nullptr; i++)
-		possibleMoves.push_back(Position(i, piecePos.second));
-
+	//	}
 	return possibleMoves;
 }
