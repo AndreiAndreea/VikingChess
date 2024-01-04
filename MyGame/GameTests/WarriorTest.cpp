@@ -1,4 +1,6 @@
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
+
 
 #include "Warrior.h"
 #include "Board.h"
@@ -26,7 +28,6 @@ TEST_F(WarriorTest, InvalidMoveUpwards) {
 
 	Position startPos(10, 6);
 	Position endPos(8, 6);
-	board.SetPiece(startPos, EPieceRole::Attacker, EPieceType::Warrior);
 	bool canMove = warrior->CanMove(startPos, endPos, board);
 
 	EXPECT_FALSE(canMove);
@@ -37,7 +38,6 @@ TEST_F(WarriorTest, InvalidMoveDiagonally) {
 
 	Position startPos(6, 1);
 	Position endPos(5, 2);
-	board.SetPiece(startPos, EPieceRole::Attacker, EPieceType::Warrior);
 	bool canMove = warrior->CanMove(startPos, endPos, board);
 
 	EXPECT_FALSE(canMove);
@@ -48,7 +48,6 @@ TEST_F(WarriorTest, InvalidMoveDownwards) {
 
 	Position startPos(2, 6);
 	Position endPos(4, 6);
-	board.SetPiece(startPos, EPieceRole::Attacker, EPieceType::Warrior);
 	bool canMove = warrior->CanMove(startPos, endPos, board);
 
 	EXPECT_FALSE(canMove);
@@ -59,7 +58,6 @@ TEST_F(WarriorTest, ValidMoveUpwards) {
 
 	Position startPos(11, 7);
 	Position endPos(8, 7);
-	board.SetPiece(startPos, EPieceRole::Attacker, EPieceType::Warrior);
 	bool canMove = warrior->CanMove(startPos, endPos, board);
 
 	EXPECT_TRUE(canMove);
@@ -70,7 +68,6 @@ TEST_F(WarriorTest, ValidMoveDownwards) {
 
 	Position startPos(6, 10);
 	Position endPos(11, 10);
-	board.SetPiece(startPos, EPieceRole::Attacker, EPieceType::Warrior);
 	bool canMove = warrior->CanMove(startPos, endPos, board);
 
 	EXPECT_TRUE(canMove);
