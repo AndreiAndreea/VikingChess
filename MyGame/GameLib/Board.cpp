@@ -157,7 +157,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 	auto piece = m_board[startPos.first][startPos.second];
 	if (IsKingInCheckmate())
 	{
-		std::cout << "Regele e in sah mat!";
+		std::cout << "King is in check mate! Attackers win!";
 		return false;
 	}
 	if (piece->CanMove(startPos, endPos, *this))
@@ -166,7 +166,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 		{
 			if (IsKingThreatened())
 			{
-				std::cout << "Regele e in sah! Nu se poate face mutarea. Muta regele!";
+				std::cout << "King is in check! Move the King!";
 				return false;
 			}
 		}
@@ -290,7 +290,30 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			SetPiece(endPos, piece->GetRole(), piece->GetType());
 			SetPieceToNullptr(startPos);
 			// ---------------------------------
-
+			
+			// Check if the king is in a winning position = is in a corner
+			// Top left corner
+			if (endPos.first == 1 && endPos.second == 1)
+			{
+				std::cout << "King is in top-left corner! Defenders win!";
+			}
+			else // Top right corner
+				if (endPos.first == 1 && endPos.second == 11)
+				{
+					std::cout << "King is in top-right corner! Defenders win!";
+				}
+				else // Bottom left corner
+					if (endPos.first == 11 && endPos.second == 1)
+					{
+						std::cout << "King is in bottom-left corner! Defenders win!";
+					}
+					else // Bottom right corner
+						if (endPos.first == 11 && endPos.second == 11)
+						{
+							std::cout << "King is in bottom-right corner! Defenders win!";
+						}
+			// ---------------------------------
+			
 			// Check if any opponents piece is captured in our sandwich
 			// Check opponent horizontally left
 			if (endPos.second - 2 >= 1 &&
