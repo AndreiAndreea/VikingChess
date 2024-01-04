@@ -51,6 +51,16 @@ bool King::IsThreatened(Position piecePos, const Board& board)
 		board.GetBoard()[piecePos.first + 1][piecePos.second]->Is(EPieceType::Warrior, EPieceRole::Attacker))
 		return true;
 
+	// Right position open
+	if (piecePos.first - 1 >= 1 && piecePos.second - 1 >= 1 && piecePos.first + 1 <= 11 &&
+		board.GetPiece(Position(piecePos.first - 1, piecePos.second)) &&
+		board.GetPiece(Position(piecePos.first, piecePos.second - 1)) &&
+		board.GetPiece(Position(piecePos.first + 1, piecePos.second)) &&
+		board.GetBoard()[piecePos.first - 1][piecePos.second]->Is(EPieceType::Warrior, EPieceRole::Attacker) &&
+		board.GetBoard()[piecePos.first][piecePos.second - 1]->Is(EPieceType::Warrior, EPieceRole::Attacker) &&
+		board.GetBoard()[piecePos.first + 1][piecePos.second]->Is(EPieceType::Warrior, EPieceRole::Attacker))
+		return true;
+
 	return false;
 }
 
