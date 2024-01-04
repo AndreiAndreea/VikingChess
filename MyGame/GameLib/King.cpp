@@ -10,7 +10,12 @@ King::King(EPieceRole role)
 
 bool King::CanMove(Position startPos, Position endPos, const Board& board)
 {
-    return false;
+	PositionList possibleMoves;
+	possibleMoves = GetPossibleMoves(startPos, board);
+	if (std::find(possibleMoves.begin(), possibleMoves.end(), endPos) != possibleMoves.end())
+		return true;
+
+	return false;
 }
 
 
