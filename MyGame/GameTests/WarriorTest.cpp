@@ -21,7 +21,7 @@ protected:
 
 };
 
-TEST_F(WarriorTest, InvalidMove) {
+TEST_F(WarriorTest, InvalidMoveUpwards) {
 	Board board;
 
 	Position startPos(10, 6);
