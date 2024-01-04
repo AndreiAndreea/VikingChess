@@ -159,78 +159,64 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			SetPiece(endPos, piece->GetRole(), piece->GetType());
 			SetPieceToNullptr(startPos);
 			// ---------------------------------
-			
+
 			// Check if the current piece is in a sandwich -> therefore it is captured
 			// Surrounded vertically
-			//if (IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
-			//	IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-			//{
-			//	SetPieceToNullptr(endPos);
-			//}
-			//// Surrounded horizontally
-			//if (IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }) &&
-			//	IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }))
-			//{
-			//	SetPieceToNullptr(endPos);
-			//}
-			//// ---------------------------------
+			if (IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
+				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			{
+				SetPieceToNullptr(endPos);
+			}
+			else
+				// Surrounded horizontally
+				if (IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }) &&
+					IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }))
+				{
+					SetPieceToNullptr(endPos);
+				}
+			// ---------------------------------
 
-			//// Check if any opponents piece is captured in our sandwich
-			//// Check opponent left
-			//if (endPos.second - 1 >= 0 &&
-			//	IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }))
-			//{
-			//	// Check if the piece is in a sandwich
-			//	if (endPos.second - 2 >= 0 &&
-			//		!IsOpposite(m_board[endPos.first][endPos.second - 2], piece->GetRole(), { EPieceType::Warrior }))
-			//	{
-			//		SetPieceToNullptr(Position(endPos.first, endPos.second - 1));
-			//	}
-			//}
+			// Check if any opponents piece is captured in our sandwich
+			// Check opponent horizontally left
+			if (endPos.second - 2 >= 1 &&
+				IsOpposite(m_board[endPos.first][endPos.second - 1], piece->GetRole(), { EPieceType::Warrior }) &&
+				!IsOpposite(m_board[endPos.first][endPos.second - 2], piece->GetRole(), { EPieceType::Warrior }))
+			{
+				SetPieceToNullptr(Position(endPos.first, endPos.second - 1));
+			}
 
-			//// Check opponent right
-			//if (endPos.second + 1 < 11 &&
-			//	IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }))
-			//{
-			//	// Check if the piece is in a sandwich
-			//	if (endPos.second + 2 < 11 &&
-			//		!IsOpposite(m_board[endPos.first][endPos.second + 2], piece->GetRole(), { EPieceType::Warrior }))
-			//	{
-			//		SetPieceToNullptr(Position(endPos.first, endPos.second + 1));
-			//	}
-			//}
+			// Check opponent horizontally right
+			if (endPos.second + 2 <= 11 &&
+				IsOpposite(m_board[endPos.first][endPos.second + 1], piece->GetRole(), { EPieceType::Warrior }) &&
+				!IsOpposite(m_board[endPos.first][endPos.second + 2], piece->GetRole(), { EPieceType::Warrior }))
+			{
+				SetPieceToNullptr(Position(endPos.first, endPos.second + 1));
+			}
 
-			//// Check opponent up
-			//if (endPos.first - 1 >= 0 &&
-			//	IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-			//{
-			//	// Check if the piece is in a sandwich
-			//	if (endPos.first - 2 >= 0 &&
-			//		!IsOpposite(m_board[endPos.first - 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-			//	{
-			//		SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
+			// Check opponent vertically up
+			if (endPos.first - 2 >= 1 &&
+				IsOpposite(m_board[endPos.first - 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
+				!IsOpposite(m_board[endPos.first - 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			{
+				SetPieceToNullptr(Position(endPos.first - 1, endPos.second));
 
-			//	}
-			//}
+			}
 
-			//// Check opponent down
-			//if (endPos.first + 1 < 11 &&
-			//	IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-			//{
-			//	// Check if the piece is in a sandwich
-			//	if (endPos.first + 2 < 11 &&
-			//		!IsOpposite(m_board[endPos.first + 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
-			//	{
-			//		SetPieceToNullptr(Position(endPos.first + 1, endPos.second));
-			//	}
-			//}
+			// Check opponent vertically down
+			if (endPos.first + 2 <= 11 &&
+				IsOpposite(m_board[endPos.first + 1][endPos.second], piece->GetRole(), { EPieceType::Warrior }) &&
+				!IsOpposite(m_board[endPos.first + 2][endPos.second], piece->GetRole(), { EPieceType::Warrior }))
+			{
+				SetPieceToNullptr(Position(endPos.first + 1, endPos.second));
+			}
+
 		}
 		return true;
 
 	}
-
 	return false;
 }
+
 
 bool Board::IsKingInCheck(Position startPos, Position endPos, EPieceRole pieceRole) const
 {
