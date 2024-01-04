@@ -21,6 +21,7 @@ public:
 	void InitializeBoard();
 
 	PieceMatrix GetBoard() const;
+	PiecePtr GetPiece(const Position& pos) const;
 
 	bool MakeMove(Position startPos, Position endPos);
 

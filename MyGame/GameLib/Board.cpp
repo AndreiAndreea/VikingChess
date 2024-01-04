@@ -116,6 +116,11 @@ PieceMatrix Board::GetBoard() const
 	return m_board;
 }
 
+PiecePtr Board::GetPiece(const Position& pos) const
+{
+	return m_board[pos.first][pos.second];
+}
+
 void Board::SetPiece(const Position& pos, EPieceRole role, EPieceType type)
 {
 
