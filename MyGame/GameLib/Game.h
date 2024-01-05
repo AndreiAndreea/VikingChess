@@ -39,7 +39,6 @@ public:
 
 	IPieceInfoPtr GetPieceInfo(int i, int j) const override;
 
-	// !!!!! CHECK AND TRIPLE CHECK THIS !!!!!
 	bool MakeMove(const std::string& startPosStr, const std::string& endPosStr) override;
 
 

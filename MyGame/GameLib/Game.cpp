@@ -22,18 +22,14 @@ void Game::Play()
 	// Perform actions based on the current state
 	if (IsStatePlaying())
 	{
-		// Implement the logic for player moves or other actions in the "Playing" state
-		// For now, you can just print a message:
 		std::cout << "Playing...\n";
 	}
 	else if (IsState(EGameState::DefendersWon))
 	{
-		// Implement the logic for the "DefendersWon" state
 		std::cout << "Defenders won!\n";
 	}
 	else if (IsState(EGameState::AttackersWon))
 	{
-		// Implement the logic for the "AttackersWon" state
 		std::cout << "Attackers won!\n";
 	}
 }
