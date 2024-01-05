@@ -30,6 +30,12 @@
     <ClCompile Include="PieceMockTest.cpp">
       <Filter>Pieces Tests</Filter>
     </ClCompile>
+    <ClCompile Include="PossibleMovesTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KingTest.cpp">
+      <Filter>Pieces Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

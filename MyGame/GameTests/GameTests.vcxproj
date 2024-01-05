@@ -135,8 +135,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="KingTest.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PieceMockTest.cpp" />
+    <ClCompile Include="PossibleMovesTest.cpp" />
     <ClCompile Include="WarriorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
