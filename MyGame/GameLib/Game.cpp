@@ -128,14 +128,18 @@ bool Game::IsInputValid(const Position& startPos, const Position& endPos)
 		if (m_turn)
 		{
 			if (m_board.GetBoard()[startPos.first][startPos.second]->GetRole() != EPieceRole::Attacker)
+			{
 				std::cout << "Piesa aleasa este a adversarului!";
 				return false;
+			}
 		}
 		else
 		{
 			if (m_board.GetBoard()[startPos.first][startPos.second]->GetRole() != EPieceRole::Defender)
+			{
 				std::cout << "Piesa aleasa este a adversarului!";
 				return false;
+			}
 		}
 
 	if (endPos.first < 1 || endPos.first > 11 || endPos.second < 1 || endPos.second > 11)
