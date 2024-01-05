@@ -113,8 +113,11 @@ bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr
 	Position endPos = ConvertToPos(endPosStr);
 
 	if (IsInputValid(startPos, endPos))
-		//endpos to be different than startpos
-		if (startPos != endPos)
+		//endpos to be different than startpos, so the piece can move somewhere else, 
+		// //endpos to be an empty space and startpos to be a piece
+		if (startPos != endPos && m_board.GetBoard()[startPos.first][startPos.second] != nullptr &&
+			m_board.GetBoard()[endPos.first][endPos.second] == nullptr)
+			//check if the move is valid
 			if (m_board.MakeMove(startPos, endPos))
 			{
 				//se schimba randul si se returneaza true daca mutarea a fost valida
