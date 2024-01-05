@@ -155,11 +155,6 @@ static bool IsOpposite(PiecePtr piece, EPieceRole role, std::vector<EPieceType> 
 bool Board::MakeMove(Position startPos, Position endPos)
 {
 	auto piece = m_board[startPos.first][startPos.second];
-	if (IsKingInCheckmate())
-	{
-		std::cout << "King is in check mate! Attackers win!";
-		return false;
-	}
 	if (piece->CanMove(startPos, endPos, *this))
 	{
 		if (piece->GetType() != EPieceType::King)
@@ -290,30 +285,7 @@ bool Board::MakeMove(Position startPos, Position endPos)
 			SetPiece(endPos, piece->GetRole(), piece->GetType());
 			SetPieceToNullptr(startPos);
 			// ---------------------------------
-			
-			// Check if the king is in a winning position = is in a corner
-			// Top left corner
-			if (endPos.first == 1 && endPos.second == 1)
-			{
-				std::cout << "King is in top-left corner! Defenders win!";
-			}
-			else // Top right corner
-				if (endPos.first == 1 && endPos.second == 11)
-				{
-					std::cout << "King is in top-right corner! Defenders win!";
-				}
-				else // Bottom left corner
-					if (endPos.first == 11 && endPos.second == 1)
-					{
-						std::cout << "King is in bottom-left corner! Defenders win!";
-					}
-					else // Bottom right corner
-						if (endPos.first == 11 && endPos.second == 11)
-						{
-							std::cout << "King is in bottom-right corner! Defenders win!";
-						}
-			// ---------------------------------
-			
+
 			// Check if any opponents piece is captured in our sandwich
 			// Check opponent horizontally left
 			if (endPos.second - 2 >= 1 &&
@@ -455,13 +427,13 @@ bool Board::IsKingThreatened()
 	return king.IsThreatened(GetKingPositionOnBoard(), *this);
 }
 
-bool Board::IsKingInCheckmate()
+bool Board::IsKingInCheckmate() const
 {
 	Position kingPos = GetKingPositionOnBoard();
 	King king = King(EPieceRole::Defender);
 
 	// Check if there is no possible move for the king (to escape threaten)
-	if (king.IsThreatened(GetKingPositionOnBoard(), *this) && 
+	if (king.IsThreatened(GetKingPositionOnBoard(), *this) &&
 		king.GetPossibleMoves(kingPos, *this).size() == 0)
 		return true;
 
@@ -518,5 +490,38 @@ bool Board::IsKingInCheckmate()
 		IsOpposite(m_board[kingPos.first][kingPos.second - 1], GetPiece(Position(kingPos.first, kingPos.second - 1))->GetRole(), { EPieceType::Warrior }))
 		return true;
 
+
+
+	return false;
+}
+
+bool Board::IsKingWinning() const
+{
+	Position kingPos = GetKingPositionOnBoard();
+	// Check if the king is in a winning position = is in a corner
+// Top left corner
+	if (kingPos.first == 1 && kingPos.second == 1)
+	{
+		std::cout << "King is in top-left corner! Defenders win!";
+		return true;
+	}
+	else // Top right corner
+		if (kingPos.first == 1 && kingPos.second == 11)
+		{
+			std::cout << "King is in top-right corner! Defenders win!";
+			return true;
+		}
+		else // Bottom left corner
+			if (kingPos.first == 11 && kingPos.second == 1)
+			{
+				std::cout << "King is in bottom-left corner! Defenders win!";
+				return true;
+			}
+			else // Bottom right corner
+				if (kingPos.first == 11 && kingPos.second == 11)
+				{
+					std::cout << "King is in bottom-right corner! Defenders win!";
+					return true;
+				}
 	return false;
 }

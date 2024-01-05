@@ -26,8 +26,8 @@ EPlayer Game::GetWinner() const
 	if (IsGameOver())
 	{
 		if (m_turn)
-			return EPlayer::Attacker;
-		return EPlayer::Defender;
+			return EPlayer::Defender;
+		return EPlayer::Attacker;
 	}
 
 	return EPlayer::None;
@@ -40,8 +40,13 @@ bool Game::IsGameOver() const
 		role = EPieceRole::Attacker;
 	else
 		role = EPieceRole::Defender;
-	/*if (m_board.IsCheckmate(role))
-		return true;*/
+
+	if (m_board.IsKingInCheckmate())
+		return true;
+
+	if (m_board.IsKingWinning())
+		return true;
+
 	return false;
 }
 
@@ -107,12 +112,15 @@ bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr
 	Position startPos = ConvertToPos(startPosStr);
 	Position endPos = ConvertToPos(endPosStr);
 
-	if (IsInputValid(startPos, endPos) && m_board.MakeMove(startPos, endPos))
-	{
-		//se schimba randul si se returneaza true daca mutarea a fost valida
-		m_turn = 1 - m_turn;
-		return true;
-	}
+	if (IsInputValid(startPos, endPos))
+		//endpos to be different than startpos
+		if (startPos != endPos)
+			if (m_board.MakeMove(startPos, endPos))
+			{
+				//se schimba randul si se returneaza true daca mutarea a fost valida
+				m_turn = 1 - m_turn;
+				return true;
+			}
 	return false;
 
 }
