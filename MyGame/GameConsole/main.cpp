@@ -3,7 +3,6 @@
 #include<conio.h>
 
 #include "IGame.h"
-#include "Game.h"
 
 std::string PieceToStr(IPieceInfoPtr pieceInfo)
 {
@@ -13,7 +12,7 @@ std::string PieceToStr(IPieceInfoPtr pieceInfo)
 	{
 	case EPieceType::King:
 		result = "  K";
-		break; 
+		break;
 	case EPieceType::Warrior:
 		result = "  W";
 		break;
@@ -67,7 +66,7 @@ void PrintBoard(const IGamePtr& game) {
 		}
 		std::cout << "\n";
 	}
-	std::cout << backgroundColorBorder << blackColor<< std::left << std::setw(cellWidth) << " " << resetColor;
+	std::cout << backgroundColorBorder << blackColor << std::left << std::setw(cellWidth) << " " << resetColor;
 	for (int i = 0; i < 11; i++)
 	{
 		std::cout << backgroundColorBorder << blackColor << std::left << std::setw(cellWidth) << horizontalIndex[i] << resetColor;
@@ -79,26 +78,21 @@ int main()
 	IGamePtr game = IGame::Produce();
 	PrintBoard(game);
 	std::cout << "\n";
-	while (game->IsGameOver() == false)
+	game->Play();
+	while (!game->IsGameOver())
 	{
-		std::string startPos, endPos;
+		std::string comand;
 		std::cout << "Insert your move " << PlayerToStr(game->GetCurrentPlayer()) << ": ";
-		std::cin >> startPos; std::cin >> endPos;
+		std::string startPos, endPos;
+		std::cin >> startPos >> endPos;
 		std::cout << "\n";
-		while (!game->MakeMove(startPos, endPos))
-		{
-			std::cout << "Invalid Move\n";
-			std::cout << "Insert your move " << PlayerToStr(game->GetCurrentPlayer()) << ": ";
-			std::cin >> startPos; std::cin >> endPos;
-			std::cout << "\n";
-		}
-		//clear screen before print new board
+		game->PlayerMove(startPos, endPos);
 		system("cls");
 		PrintBoard(game);
 		std::cout << "\n";
 	}
-
-	std::cout << "Winner is: " << PlayerToStr(game->GetWinner()) << " !!!";
+	std::cout << "\n";
+	game->Play();
 
 	return 0;
 }

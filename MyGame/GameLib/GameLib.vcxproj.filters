@@ -74,5 +74,8 @@
     <ClInclude Include="EPieceType.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
+    <ClInclude Include="EGameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,8 @@
 #include "Game.h"
 #include<iostream>
 
-Game::Game() : m_turn(0)
+Game::Game() : m_turn(0),
+m_state(EGameState::Playing)
 {
 
 }
@@ -18,7 +19,45 @@ Board Game::GetBoard() const
 
 void Game::Play()
 {
-	std::cout << "Test";
+	// Perform actions based on the current state
+	if (IsStatePlaying())
+	{
+		// Implement the logic for player moves or other actions in the "Playing" state
+		// For now, you can just print a message:
+		std::cout << "Playing...\n";
+	}
+	else if (IsState(EGameState::DefendersWon))
+	{
+		// Implement the logic for the "DefendersWon" state
+		std::cout << "Defenders won!\n";
+	}
+	else if (IsState(EGameState::AttackersWon))
+	{
+		// Implement the logic for the "AttackersWon" state
+		std::cout << "Attackers won!\n";
+	}
+}
+
+void Game::PlayerMove(const std::string& startPos, const std::string& endPos)
+{
+	if (MakeMove(startPos, endPos))
+	{
+		// Check for game state transitions and update the state
+		if (m_board.IsKingInCheckmate())
+		{
+			UpdateState(EGameState::AttackersWon);
+		}
+		else
+			if (m_board.IsKingWinning())
+			{
+				UpdateState(EGameState::DefendersWon);
+			}
+		else
+		{
+			// Update the state to "Playing" if the game is still in progress
+			UpdateState(EGameState::Playing);
+		}
+	}
 }
 
 EPlayer Game::GetWinner() const
@@ -35,19 +74,16 @@ EPlayer Game::GetWinner() const
 
 bool Game::IsGameOver() const
 {
-	EPieceRole role;
-	if (m_turn)
-		role = EPieceRole::Attacker;
-	else
-		role = EPieceRole::Defender;
-
-	if (m_board.IsKingInCheckmate())
+	if (m_board.IsKingInCheckmate() || m_board.IsKingWinning())
+	{
 		return true;
-
-	if (m_board.IsKingWinning())
-		return true;
-
+	}
 	return false;
+}
+
+bool Game::IsStatePlaying() const
+{
+	return m_state == EGameState::Playing;
 }
 
 EPlayer Game::GetCurrentPlayer() const
@@ -88,25 +124,49 @@ Position Game::ConvertToPos(const std::string& pos)
 bool Game::IsInputValid(const Position& startPos, const Position& endPos)
 {
 	if (startPos.first < 1 || startPos.first > 11 || startPos.second < 1 || startPos.second > 11)
+	{
+		std::cout << "Pozitia initiala nu este valida!";
 		return false;
+	}
 	if (m_board.GetBoard()[startPos.first][startPos.second])
 		if (m_turn)
 		{
 			if (m_board.GetBoard()[startPos.first][startPos.second]->GetRole() != EPieceRole::Attacker)
+				std::cout << "Piesa aleasa este a adversarului!";
 				return false;
 		}
 		else
 		{
 			if (m_board.GetBoard()[startPos.first][startPos.second]->GetRole() != EPieceRole::Defender)
+				std::cout << "Piesa aleasa este a adversarului!";
 				return false;
 		}
 
 	if (endPos.first < 1 || endPos.first > 11 || endPos.second < 1 || endPos.second > 11)
+	{
+		std::cout << "Pozitia finala nu este valida!";
 		return false;
+	}
 
 	return true;
 }
 
+bool Game::IsState(EGameState state) const
+{
+	return m_state == state;
+}
+
+void Game::UpdateState(EGameState state)
+{
+	if (state == EGameState::DefendersWon || state == EGameState::AttackersWon)
+	{
+		m_state = state;
+	}
+	else
+	{
+		m_state = EGameState::Playing;
+	}
+}
 bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr)
 {
 	Position startPos = ConvertToPos(startPosStr);
@@ -125,7 +185,6 @@ bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr
 				return true;
 			}
 	return false;
-
 }
 
 PieceInfo::PieceInfo(EPieceType type, EPieceRole role)

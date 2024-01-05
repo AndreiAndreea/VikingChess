@@ -4,6 +4,7 @@
 #include "IGame.h"
 #include "Board.h"
 #include "Player.h"
+#include "EGameState.h"
 
 
 class PieceInfo : public IPieceInfo
@@ -29,9 +30,12 @@ public:
 	//methods from interface IGame
 	void Play() override;
 
+	void PlayerMove(const std::string& startPos, const std::string& endPos) override;
+
 	EPlayer GetWinner() const override;
 	EPlayer GetCurrentPlayer() const override;
 	bool IsGameOver() const override;
+	bool IsStatePlaying() const override;
 
 	IPieceInfoPtr GetPieceInfo(int i, int j) const override;
 
@@ -42,9 +46,11 @@ public:
 private:
 	Position ConvertToPos(const std::string& pos);
 	bool IsInputValid(const Position& startPos, const Position& endPos);
+	bool IsState(EGameState state) const;
+	void UpdateState(EGameState state);
 
 private:
 	Board m_board;
 	int m_turn;
-
+	EGameState m_state;
 };

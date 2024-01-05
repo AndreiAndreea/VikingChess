@@ -34,9 +34,11 @@ public:
 	static IGamePtr Produce();
 
 	virtual void Play() = 0;
+	virtual void PlayerMove(const std::string& startPos, const std::string& endPos) = 0;
 	virtual EPlayer GetWinner() const = 0;
 	virtual EPlayer GetCurrentPlayer() const = 0;
 	virtual bool IsGameOver() const = 0;
+	virtual bool IsStatePlaying() const = 0;
 	virtual bool MakeMove(const std::string& startPosStr, const std::string& endPosStr) = 0;
 
 	virtual IPieceInfoPtr GetPieceInfo(int i, int j) const = 0;
