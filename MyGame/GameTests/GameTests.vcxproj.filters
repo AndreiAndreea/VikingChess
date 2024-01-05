@@ -27,6 +27,9 @@
     <ClCompile Include="WarriorTest.cpp">
       <Filter>Pieces Tests</Filter>
     </ClCompile>
+    <ClCompile Include="PieceMockTest.cpp">
+      <Filter>Pieces Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

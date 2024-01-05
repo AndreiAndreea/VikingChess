@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PieceMockTest.cpp" />
     <ClCompile Include="WarriorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
