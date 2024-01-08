@@ -4,11 +4,8 @@
 
 #include "IGame.h"
 #include "GameRules.h"
-
-struct ColorTheme {
-	std::string backgroundColor1;
-	std::string backgroundColor2;
-};
+#include "ColorTheme.h"
+#include "ColorThemeSelector.h"
 
 std::string PieceToStr(IPieceInfoPtr pieceInfo)
 {
@@ -36,42 +33,6 @@ std::string PlayerToStr(EPlayer player)
 	return "None";
 }
 
-static void DisplayGameRules() {
-	std::string userResponse;
-	std::cout << "Would you like to view the rules of Viking Chess (Hnefatafl)? (Yes/No): ";
-	std::cin >> userResponse;
-
-	if (userResponse == "Yes" || userResponse == "yes" || userResponse == "Y" || userResponse == "y") {
-		GameRules::getInstance()->displayRules(); // Call Singleton to display the rules
-	}
-	else {
-		std::cout << "You have chosen not to view the rules.\n";
-	}
-}
-
-static ColorTheme ChooseColorTheme() {
-	char themeChoice;
-	std::cout << "Choose a board color theme:\n";
-	std::cout << "C - Classic\nW - Winter\nS - Spring\nU - Summer\nA - Autumn\n";
-	std::cout << "Enter your choice: ";
-	std::cin >> themeChoice;
-
-	switch (themeChoice) {
-	case 'C': // Classic
-		return { "\033[48;2;205;133;63m", "\033[48;2;139;69;19m" };
-	case 'W': // Winter
-		return { "\033[48;2;128;0;128m", "\033[48;2;100;149;237m" };
-	case 'S': // Spring
-		return { "\033[48;2;255;20;147m", "\033[48;2;100;149;237m" };
-	case 'U': // Summer
-		return { "\033[48;2;204;119;34m", "\033[48;2;0;100;0m" };
-	case 'A': // Autumn
-		return { "\033[48;2;255;165;0m", "\033[48;2;139;0;0m" };
-	default: // Default to classic theme
-		return { "\033[48;2;205;133;63m", "\033[48;2;139;69;19m" };
-	}
-}
-
 static void PrintBoard(const IGamePtr& game, const ColorTheme& theme) {
 	// ANSI color codes
 	const std::string resetColor = "\033[0m";
@@ -92,7 +53,7 @@ static void PrintBoard(const IGamePtr& game, const ColorTheme& theme) {
 		{
 			auto pieceInfo = game->GetPieceInfo(i, j);
 
-			//piece info or empty id there is nullptr
+			// Piece info or empty id there is nullptr
 			std::string pieceStr = pieceInfo ? PieceToStr(pieceInfo) : "";
 
 			// Determine the background color based on the square's position
@@ -116,9 +77,9 @@ static void PrintBoard(const IGamePtr& game, const ColorTheme& theme) {
 
 int main()
 {
-	DisplayGameRules();
+	GameRules::getInstance()->displayRules(); // Call Singleton to display the rules
 	IGamePtr game = IGame::Produce();
-	ColorTheme theme = ChooseColorTheme();
+	ColorTheme theme = ColorThemeSelector::getInstance()->chooseTheme(); // Call Singleton class to choose the color theme
 	PrintBoard(game, theme);
 	game->Play();
 	while (!game->IsGameOver())

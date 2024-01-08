@@ -139,10 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColorThemeSelector.cpp" />
     <ClCompile Include="GameRules.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorTheme.h" />
+    <ClInclude Include="ColorThemeSelector.h" />
     <ClInclude Include="GameRules.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
