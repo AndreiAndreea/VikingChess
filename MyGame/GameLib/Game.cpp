@@ -1,5 +1,7 @@
 #include "Game.h"
 #include<iostream>
+#include <chrono>
+#include <thread>
 
 Game::Game() : m_turn(0),
 m_state(EGameState::Playing)
@@ -184,6 +186,10 @@ bool Game::MakeMove(const std::string& startPosStr, const std::string& endPosStr
 				m_turn = 1 - m_turn;
 				return true;
 			}
+
+	std::cout << " Mutare invalida! Incearca din nou!";
+	std::this_thread::sleep_for(std::chrono::seconds(2)); // Wait for 2 seconds
+
 	return false;
 }
 
